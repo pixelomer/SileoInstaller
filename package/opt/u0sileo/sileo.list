@@ -1,0 +1,3 @@
+deb https://repounclutter.coolstar.org/ ./
+deb https://repo.chariz.io/ ./
+deb https://repo.dynastic.co/ ./

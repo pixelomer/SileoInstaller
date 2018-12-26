@@ -1,0 +1,19 @@
+#!/bin/bash
+set -e
+
+/bin/rm -rf /tmp/sileo.deb /tmp/sileofiles.tmp
+if [[ -f "/opt/u0sileo/sileo.list" ]]; then
+  rm "/opt/u0sileo/sileo.list" || true
+fi
+
+echo "Downloading Sileo v0.3b1 from the official source..."
+/usr/bin/curl -sLo /tmp/sileo.deb https://electrarepo64.coolstar.org/debs/org.coolstar.sileo_0.3b1_iphoneos-arm.deb
+sleep 1
+if [[ ! -f "/tmp/sileo.deb" ]]; then exit 1; fi
+/usr/bin/dpkg -x /tmp/sileo.deb /tmp/sileofiles.tmp
+
+echo "Patching Sileo..."
+printf "/opt////////////u0sileo" | /bin/dd bs=1 seek=1506035 conv=notrunc of=/tmp/sileofiles.tmp/Applications/Sileo.app/Sileo
+printf "/opt/u0sileo/sileo.list" | /bin/dd bs=1 seek=1506098 conv=notrunc of=/tmp/sileofiles.tmp/Applications/Sileo.app/Sileo
+
+exit 0

@@ -1,0 +1,15 @@
+Package: com.pixelomer.u0sileo
+Name: Sileo Installer
+Pre-Depends: curl, coreutils-bin, uikittools
+Depends: firmware (>=11.0)
+Version: 0.3b1-1
+Architecture: iphoneos-arm
+Description: Sileo installer for unc0ver
+  This is a simple tool that does the following:
+  1. Downloads Sileo from Coolstar's repository
+  2. Patches the downloaded binary to make it work alongside Cydia
+  3. Moves the patched app to the Applications folder
+  Requires iOS 11 or higher and unc0ver. Does not fix other bugs in Sileo.
+Maintainer: PixelOmer
+Author: PixelOmer
+Section: Utilities

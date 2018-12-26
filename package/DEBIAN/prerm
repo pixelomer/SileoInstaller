@@ -1,0 +1,6 @@
+#!/bin/bash
+
+/bin/rm -rf /Applications/Sileo.app
+echo "Refreshing icon cache..."
+/usr/bin/uicache
+exit 0
