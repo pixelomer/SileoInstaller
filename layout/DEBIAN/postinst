@@ -1,0 +1,47 @@
+#!/bin/bash
+set -e
+
+echo "Copying the Sileo to the Applications folder..."
+/bin/cp -r /tmp/sileofiles.tmp/Applications/Sileo.app /Applications/Sileo.app
+
+# Install the default sources if the file doesn't exist
+if [[ ! -d "/opt/u0sileo/sources.list.d" ]]; then
+  /bin/mkdir -p /opt/u0sileo/sources.list.d
+fi
+
+if [[ ! -f "/opt/u0sileo/sources.list.d/sileo.sources" ]]; then
+  echo "Installing the default sources..."
+  /bin/cat > /opt/u0sileo/sources.list.d/sileo.sources <<EOF
+Types: deb
+URIs: https://repounclutter.coolstar.org/
+Suites: ./
+Components:
+
+Types: deb
+URIs: https://repo.chariz.io/
+Suites: ./
+Components:
+
+Types: deb
+URIs: https://repo.dynastic.co/
+Suites: ./
+Components:
+
+
+EOF
+fi
+
+# Remove temporary files
+echo "Cleaning up..."
+/bin/rm -rf /tmp/sileo.deb /tmp/sileofiles.tmp
+
+# Add SUID bit to giveMeRoot and make every file in the app executable
+echo "Setting permissions..."
+/bin/chmod -R 755 /Applications/Sileo.app
+/bin/chmod 4755 /Applications/Sileo.app/giveMeRoot
+
+# Run uicache to make the app show up
+echo "Refreshing icon cache..."
+/usr/bin/uicache
+
+exit 0

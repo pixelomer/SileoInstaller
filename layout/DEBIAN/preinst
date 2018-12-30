@@ -1,0 +1,27 @@
+#!/bin/bash
+set -e
+
+# Remove old files
+/bin/rm -rf /tmp/sileo.deb /tmp/sileofiles.tmp
+/bin/rm -f /opt/u0sileo/sileo.list
+
+# Download Sileo
+echo "Downloading Sileo v0.4b2 from the official source..."
+/usr/bin/curl -sLo /tmp/sileo.deb https://electrarepo64.coolstar.org/debs/org.coolstar.sileo_0.4b2_iphoneos-arm.deb
+sleep 1
+
+# Fail if the deb isn't there
+if [[ ! -f "/tmp/sileo.deb" ]]; then exit 1; fi
+
+# Check if the file was corrupted during download
+sileo_shasum="$(/usr/bin/sha256sum /tmp/sileo.deb | awk '{print $1}')"
+expected_shasum="e2b338dd1ace7028f59cec7d8472c16998665c50e61cefc12138d10b862a53c6"
+if [[ "${sileo_shasum}" != "${expected_shasum}" ]]; then
+  echo "SHA256 mismatch. Expected '${expected_shasum}', got '${sileo_shasum}'";
+  exit 1
+fi
+
+# Extract the deb
+/usr/bin/dpkg -x /tmp/sileo.deb /tmp/sileofiles.tmp
+
+exit 0
