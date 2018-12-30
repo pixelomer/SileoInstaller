@@ -1,13 +1,14 @@
 # Changelog
 
-## v0.4b3
+## v0.4b2
 
 - The binary is no longer patched.
 - The preinst script now checks the SHA256 hash of the downloaded file.
 
 ## v0.3b1-2
 
-- As the v0.3b1 (Preview 1) build is no longer available from Coolstar's repository, this version repackages it. The patches are no longer done on the device.
+- As the v0.3b1 (Preview 1) build is no longer available from Coolstar's repository, this version repackages it.
+- The patches are no longer done on the device. The packaged app is already patched.
 
 ## v0.3b1-1
 
