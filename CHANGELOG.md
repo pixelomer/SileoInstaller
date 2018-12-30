@@ -2,6 +2,7 @@
 
 ## v0.4b2
 
+- Updated for Sileo Preview 2.
 - The binary is no longer patched.
 - The preinst script now checks the SHA256 hash of the downloaded file.
 
@@ -16,4 +17,4 @@
 
 ## v0.3b1
 
-- Initial installer.
+- Initial installer for Sileo Preview 1.
